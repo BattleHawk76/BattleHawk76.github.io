@@ -4,13 +4,20 @@
 <h1>我叫<span id="myname"></span></h1>
     <p>我的学号是<span id="mynumber"></span>
     </p>
+    <button id="btn">下一个</button>
     <img id="logo" src="zio.jpg" weight="400" height="400" style="border-radius:10px 20px 30px 80px">
     <script>
         $(function(){
             $.get("data.json",function(result){
             $("#myname").text(result.myname);
             $("#mynumber").text(result.mynumber);
-        })  
+        }) 
+            $("#btn").click(function(){
+                $.get("data1.json",function(result){
+                $("#myname").text(result.myname);
+                $("#mynumber").text(result.mynumber);
+            })
+
         })
         
     
