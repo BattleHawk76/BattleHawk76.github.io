@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登陆</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="jquery-3.4.1.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+
+</head>
+
+<body>
+    <div id="box">
+        <input placeholder="请输入账号" id="id">
+        <br>
+        <input placeholder="请输入密码" id="password">
+        <br>
+        <el-button type="primary" id="btn">提交</el-button>
+    </div>
+
+    <script>
+        var box = new Vue({
+            el: "#box",
+            data: {
+
+            }
+        })
+    </script>
+    <script>
+        $(function () {
+            $("#btn").click(function () {
+
+                $.ajax({
+                    type: "post",
+                    url: "http://127.0.0.1:8585/login.json",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        "id": $("#id").val(),
+                        "password": $('#password').val()
+                    }),
+                    success: function (result1) {
+                        if (result1.result == 'success') {
+                            location.href = "http://127.0.0.1:5500/index.html";
+                        }
+                    }
+                })
+                // window.location.href = "http://127.0.0.1:5500/index.html"
+
+            })
+        })
+    </script>
+</body>
+
+</html>

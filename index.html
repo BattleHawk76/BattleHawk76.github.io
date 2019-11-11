@@ -1,27 +1,46 @@
 <html>
-    <script src="jquery-3.4.1.js"></script>
+<script src="jquery-3.4.1.js"></script>
+
 <body>
-<h1>我叫<span id="myname"></span></h1>
+    <h1>我叫<span id="myname"></span></h1>
     <p>我的学号是<span id="mynumber"></span>
     </p>
     <button id="btn">下一个</button><br>
     <img id="logo" src="zio.jpg" weight="400" height="400" style="border-radius:10px 20px 30px 80px">
     <script src="http://example.com/data.php?callback=dosomething"></script>
     <script>
-        $(function(){
-            $.get("http://127.0.0.1:8585/data.json",function(result){
-            $("#myname").text(result.myname);
-            $("#mynumber").text(result.mynumber);
-        }) 
-            $("#btn").click(function(){
-                $.get("http://127.0.0.1:8585/data1.json",function(result){
+        $(function () {
+            var callback = function (result) {
                 $("#myname").text(result.myname);
                 $("#mynumber").text(result.mynumber);
+            }
+            $.ajax({
+                type: "post",
+                url: "http://127.0.0.1:8585/data.json",
+                contentType: "application/json",
+                data: JSON.stringify({ "stunumber": "2012020045" }),
+                callback
             })
-        
+            $("#btn").click(function () {
+                $.post("http://127.0.0.1:8585/data1.json", function (result) {
+                    $("#myname").text(result.myname);
+                    $("#mynumber").text(result.mynumber);
+                })
+            })
+            //     $.get("http://127.0.0.1:8585/data.json",function(result){
+            //     $("#myname").text(result.myname);
+            //     $("#mynumber").text(result.mynumber);
+            // }) 
+            //     $("#btn").click(function(){
+            //         $.get("http://127.0.0.1:8585/data1.json",function(result){
+            //         $("#myname").text(result.myname);
+            //         $("#mynumber").text(result.mynumber);
+            //     })
+
+            // })
         })
-    })
-    
+
     </script>
 </body>
+
 </html>
